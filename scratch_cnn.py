@@ -26,17 +26,30 @@ num_fc = 128
 num_filter_conv_layer1 = 20
 num_filter_conv_layer2 = 50
 
-W1 = mx.gluon.Parameter('W1',shape=(num_filter_conv_layer1, 1, 3,3), init=mx.init.Xavier())
-b1 = mx.gluon.Parameter('b2',shape=(num_filter_conv_layer1,), init=mx.init.Zero())
 
-W2 = mx.gluon.Parameter('W2',shape=(num_filter_conv_layer2, num_filter_conv_layer1, 5,5), init=mx.init.Xavier())
-b2 = mx.gluon.Parameter('b2',shape=(num_filter_conv_layer2,), init=mx.init.Zero())
+W1 = nd.random_normal(shape=(num_filter_conv_layer1, 1, 3,3), scale=weight_scale, ctx=ctx)
+b1 = nd.random_normal(shape=num_filter_conv_layer1, scale=weight_scale, ctx=ctx)
 
-W3 = mx.gluon.Parameter('W3',shape=(800,num_fc), init=mx.init.Xavier())
-b3 = mx.gluon.Parameter('b3',shape=(num_fc,), init=mx.init.Zero())
+W2 = nd.random_normal(shape=(num_filter_conv_layer2, num_filter_conv_layer1, 5, 5),scale=weight_scale, ctx=ctx)
+b2 = nd.random_normal(shape=num_filter_conv_layer2, scale=weight_scale, ctx=ctx)
 
-W4 = mx.gluon.Parameter('W4',shape=(num_fc,num_outputs), init=mx.init.Xavier())
-b4 = mx.gluon.Parameter('b4',shape=(num_outputs,), init=mx.init.Zero())
+W3 = nd.random_normal(shape=(800, num_fc), scale=weight_scale, ctx=ctx)
+b3 = nd.random_normal(shape=num_fc, scale=weight_scale, ctx=ctx)
+
+W4 = nd.random_normal(shape=(num_fc, num_outputs), scale=weight_scale, ctx=ctx)
+b4 = nd.random_normal(shape=num_outputs, scale=weight_scale, ctx=ctx)
+
+# W1 = mx.gluon.Parameter('W1',shape=(num_filter_conv_layer1, 1, 3,3), init=mx.init.Xavier())
+# b1 = mx.gluon.Parameter('b2',shape=(num_filter_conv_layer1,), init=mx.init.Zero())
+
+# W2 = mx.gluon.Parameter('W2',shape=(num_filter_conv_layer2, num_filter_conv_layer1, 5,5), init=mx.init.Xavier())
+# b2 = mx.gluon.Parameter('b2',shape=(num_filter_conv_layer2,), init=mx.init.Zero())
+
+# W3 = mx.gluon.Parameter('W3',shape=(800,num_fc), init=mx.init.Xavier())
+# b3 = mx.gluon.Parameter('b3',shape=(num_fc,), init=mx.init.Zero())
+
+# W4 = mx.gluon.Parameter('W4',shape=(num_fc,num_outputs), init=mx.init.Xavier())
+# b4 = mx.gluon.Parameter('b4',shape=(num_outputs,), init=mx.init.Zero())
 
 params = [W1, b1, W2, b2, W3, b3, W4, b4]
 
